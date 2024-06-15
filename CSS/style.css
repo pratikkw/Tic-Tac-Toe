@@ -1,0 +1,188 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas,
+source {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  outline: none;
+  font: inherit;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  font: inherit;
+}
+
+:root {
+  /* BACKGROUND CLR */
+  --body-bk-clr: hsl(165, 83%, 37%);
+  --tic-tac-toe-layout-bk-clr: hsl(163, 83%, 64%);
+
+  /* WIDTH */
+  --border-width: 0.5rem;
+
+  /* FONT-SIZE */
+  --sound-icon-fs: 3rem;
+
+  /* TOP,LEFT,RIGHT & BOTTOM */
+  --volume-box-top: 1rem;
+  --volume-box-left: 1.5rem;
+}
+
+body {
+  min-height: 100dvh;
+  position: relative;
+  isolation: isolate;
+  font-family: "Roboto", sans-serif;
+
+  background-color: var(--body-bk-clr);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.volume__box {
+  position: absolute;
+  top: var(--volume-box-top);
+  left: var(--volume-box-left);
+}
+
+.sound__icon {
+  font-size: var(--sound-icon-fs);
+}
+
+.main {
+  height: 100dvh;
+  width: 100%;
+
+  display: grid;
+  place-items: center;
+}
+
+.gamearea {
+  /* WIDTH & HEIGHT */
+  --box-width: 9.5rem;
+
+  /* FONT-SIZE */
+  --icon-fs: 5.5rem;
+
+  /* STROKE WIDTH */
+  --icon-str-width: 2.5rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.box {
+  display: grid;
+  place-items: center;
+
+  width: var(--box-width);
+  aspect-ratio: 1/1;
+}
+
+.box__1,
+.box__2,
+.box__4,
+.box__5 {
+  border-right: var(--border-width) solid var(--tic-tac-toe-layout-bk-clr);
+  border-bottom: var(--border-width) solid var(--tic-tac-toe-layout-bk-clr);
+}
+
+.box__3,
+.box__6 {
+  border-bottom: var(--border-width) solid var(--tic-tac-toe-layout-bk-clr);
+}
+
+.box__7,
+.box__8 {
+  border-right: var(--border-width) solid var(--tic-tac-toe-layout-bk-clr);
+}
+
+.icon {
+  font-size: var(--icon-fs);
+  --ionicon-stroke-width: var(--icon-str-width);
+}
+
+/* UTILITIES CLASS */
+.volume--hide {
+  display: none;
+}
+/* ------------------------ */
+
+/* Media Query */
+@media only screen and (max-width: 56.25rem) {
+  :root {
+    /* FONT-SIZE */
+    --sound-icon-fs: 2.5rem;
+
+    /* TOP,LEFT,RIGHT & BOTTOM */
+    --volume-box-left: 1rem;
+  }
+}
+
+@media only screen and (max-width: 43.75rem) {
+  .gamearea {
+    /* WIDTH & HEIGHT */
+    --box-width: 8.5rem;
+
+    /* FONT-SIZE */
+    --icon-fs: 5rem;
+  }
+}
+
+@media only screen and (max-width: 31.25rem) {
+  :root {
+    /* WIDTH */
+    --border-width: 0.4rem;
+
+    /* FONT-SIZE */
+    --sound-icon-fs: 2.25rem;
+  }
+
+  .gamearea {
+    /* WIDTH & HEIGHT */
+    --box-width: 100%;
+
+    /* FONT-SIZE */
+    --icon-fs: 5rem;
+
+    width: 100%;
+    padding-inline: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 25rem) {
+  .gamearea {
+    /* FONT-SIZE */
+    --icon-fs: 3.75rem;
+  }
+}
