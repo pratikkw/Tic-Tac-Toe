@@ -41,11 +41,13 @@ a {
   --border-width: 0.5rem;
 
   /* FONT-SIZE */
-  --sound-icon-fs: 3rem;
+  --icon-btn-fs: 2.75rem;
 
   /* TOP,LEFT,RIGHT & BOTTOM */
   --volume-box-top: 1rem;
   --volume-box-left: 1.5rem;
+  --help-btn-top: 1rem;
+  --help-btn-right: 1.5rem;
 }
 
 body {
@@ -73,10 +75,18 @@ body {
   position: absolute;
   top: var(--volume-box-top);
   left: var(--volume-box-left);
+
+  gap: 0.75rem;
 }
 
-.sound__icon {
-  font-size: var(--sound-icon-fs);
+.help {
+  position: absolute;
+  top: var(--help-btn-top);
+  right: var(--help-btn-right);
+}
+
+.icon__btn {
+  font-size: var(--icon-btn-fs);
 }
 
 .main {
@@ -92,10 +102,10 @@ body {
   --box-width: 9.5rem;
 
   /* FONT-SIZE */
-  --icon-fs: 5.5rem;
+  --icon-sym-fs: 5.5rem;
 
   /* STROKE WIDTH */
-  --icon-str-width: 2.5rem;
+  --icon-sym-str-width: 2.5rem;
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -127,9 +137,12 @@ body {
   border-right: var(--border-width) solid var(--tic-tac-toe-layout-bk-clr);
 }
 
-.icon {
-  font-size: var(--icon-fs);
-  --ionicon-stroke-width: var(--icon-str-width);
+.icon__container {
+}
+
+.icon__sym {
+  font-size: var(--icon-sym-fs);
+  --ionicon-stroke-width: var(--icon-sym-str-width);
 }
 
 /* UTILITIES CLASS */
@@ -139,13 +152,25 @@ body {
 /* ------------------------ */
 
 /* Media Query */
+@media only screen and (hover: hover) {
+  .btn {
+    cursor: pointer;
+    transition: opacity 0.3s ease-in;
+  }
+
+  .btn:hover {
+    opacity: 0.4;
+  }
+}
+
 @media only screen and (max-width: 56.25rem) {
   :root {
     /* FONT-SIZE */
-    --sound-icon-fs: 2.5rem;
+    --icon-btn-fs: 2.5rem;
 
     /* TOP,LEFT,RIGHT & BOTTOM */
     --volume-box-left: 1rem;
+    --help-btn-right: 1rem;
   }
 }
 
@@ -155,7 +180,7 @@ body {
     --box-width: 8.5rem;
 
     /* FONT-SIZE */
-    --icon-fs: 5rem;
+    --icon-sym-fs: 5rem;
   }
 }
 
@@ -165,7 +190,7 @@ body {
     --border-width: 0.4rem;
 
     /* FONT-SIZE */
-    --sound-icon-fs: 2.25rem;
+    --icon-btn-fs: 2.25rem;
   }
 
   .gamearea {
@@ -173,7 +198,7 @@ body {
     --box-width: 100%;
 
     /* FONT-SIZE */
-    --icon-fs: 5rem;
+    --icon-sym-fs: 5rem;
 
     width: 100%;
     padding-inline: 1.5rem;
@@ -183,6 +208,6 @@ body {
 @media only screen and (max-width: 25rem) {
   .gamearea {
     /* FONT-SIZE */
-    --icon-fs: 3.75rem;
+    --icon-sym-fs: 3.75rem;
   }
 }

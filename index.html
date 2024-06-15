@@ -32,92 +32,109 @@
     <script src="JS/script.js" defer></script>
   </head>
   <body>
-    <!-- VOLUME BOX -->
-    <div class="volume__box">
-      <span class="sound__btn volume__btn">
+    <!-- BTNs -->
+    <div class="volume__box flex">
+      <span class="btn volume__btn">
         <ion-icon
-          class="sound__icon volume__icon"
+          class="icon__btn volume__icon"
           name="volume-high-outline"
         ></ion-icon>
       </span>
 
-      <span class="sound__btn mute__btn volume--hide">
+      <span class="btn mute__btn volume--hide">
         <ion-icon
-          class="sound__icon mute__icon"
+          class="icon__btn mute__icon"
           name="volume-mute-outline"
         ></ion-icon>
       </span>
+
+      <span class="btn restart__btn">
+        <ion-icon
+          class="icon__btn restart__icon"
+          name="refresh-outline"
+        ></ion-icon>
+      </span>
     </div>
+
+    <div class="help">
+      <span class="btn help__btn">
+        <ion-icon
+          class="icon__btn help__icon"
+          name="help-circle-outline"
+        ></ion-icon>
+      </span>
+    </div>
+
     <main class="main">
       <div class="gamearea">
-        <div class="box box__1">
-          <span class="icon__container circle__container">
+        <div class="box box__1" data-id="1" data-fill="empty">
+          <!-- <span class="icon__container circle__container">
             <ion-icon
-              class="icon circle__icon"
+              class="icon__sym circle__icon"
               name="ellipse-outline"
             ></ion-icon>
-          </span>
+          </span> -->
         </div>
-        <div class="box box__2">
-          <span class="icon__container circle__container">
+        <div class="box box__2" data-id="2" data-fill="empty">
+          <!-- <span class="icon__container circle__container">
             <ion-icon
-              class="icon circle__icon"
+              class="icon__sym circle__icon"
               name="ellipse-outline"
             ></ion-icon>
-          </span>
+          </span> -->
         </div>
-        <div class="box box__3">
-          <span class="icon__container circle__container">
+        <div class="box box__3" data-id="3" data-fill="empty">
+          <!-- <span class="icon__container circle__container">
             <ion-icon
-              class="icon circle__icon"
+              class="icon__sym circle__icon"
               name="ellipse-outline"
             ></ion-icon>
-          </span>
+          </span> -->
         </div>
-        <div class="box box__4">
-          <span class="icon__container circle__container">
+        <div class="box box__4" data-id="4" data-fill="empty">
+          <!-- <span class="icon__container circle__container">
             <ion-icon
-              class="icon circle__icon"
+              class="icon__sym circle__icon"
               name="ellipse-outline"
             ></ion-icon>
-          </span>
+          </span> -->
         </div>
-        <div class="box box__5">
-          <span class="icon__container circle__container">
+        <div class="box box__5" data-id="5" data-fill="empty">
+          <!-- <span class="icon__container circle__container">
             <ion-icon
-              class="icon circle__icon"
+              class="icon__sym circle__icon"
               name="ellipse-outline"
             ></ion-icon>
-          </span>
+          </span> -->
         </div>
-        <div class="box box__6">
-          <span class="icon__container circle__container">
+        <div class="box box__6" data-id="6" data-fill="empty">
+          <!-- <span class="icon__container circle__container">
             <ion-icon
-              class="icon circle__icon"
+              class="icon__sym circle__icon"
               name="ellipse-outline"
             ></ion-icon>
-          </span>
+          </span> -->
         </div>
-        <div class="box box__7">
-          <span class="icon__container circle__container">
+        <div class="box box__7" data-id="7" data-fill="empty">
+          <!-- <span class="icon__container circle__container">
             <ion-icon
-              class="icon circle__icon"
+              class="icon__sym circle__icon"
               name="ellipse-outline"
             ></ion-icon>
-          </span>
+          </span> -->
         </div>
-        <div class="box box__8">
-          <span class="icon__container cross__container">
-            <ion-icon class="icon cross__icon" name="close-outline"></ion-icon>
-          </span>
+        <div class="box box__8" data-id="8" data-fill="empty">
+          <!-- <span class="icon__container cross__container">
+            <ion-icon class="icon__sym cross__icon" name="close-outline"></ion-icon>
+          </span> -->
         </div>
-        <div class="box box__9">
-          <span class="icon__container circle__container">
+        <div class="box box__9" data-id="9" data-fill="empty">
+          <!-- <span class="icon__container circle__container">
             <ion-icon
-              class="icon circle__icon"
+              class="icon__sym circle__icon"
               name="ellipse-outline"
             ></ion-icon>
-          </span>
+          </span> -->
         </div>
       </div>
     </main>
