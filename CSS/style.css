@@ -84,6 +84,10 @@ body {
   right: var(--help-btn-right);
 }
 
+.btn {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .icon__btn {
   font-size: var(--icon-btn-fs);
 }
