@@ -57,6 +57,7 @@ body {
   font-family: "Roboto", sans-serif;
 
   background-color: var(--body-bk-clr);
+  overflow: hidden;
 }
 
 .flex {
@@ -95,6 +96,31 @@ body {
 
   display: grid;
   place-items: center;
+}
+
+.layoutBox {
+  --layoutBox-aft-width: 110%;
+  --layoutBox-aft-height: 6px;
+  --top: 0%;
+  --left: 0%;
+  --transform: "";
+  --rotate: 0deg;
+  --display: none;
+
+  position: relative;
+}
+
+.layoutBox::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--top) * 1%);
+  left: calc(var(--left) * 1%);
+  transform: var(--transform) var(--rotate);
+  width: var(--layoutBox-aft-width);
+  height: var(--layoutBox-aft-height);
+  background-color: #000;
+
+  display: var(--display);
 }
 
 .gamearea {
@@ -191,6 +217,11 @@ body {
 
     /* FONT-SIZE */
     --icon-btn-fs: 2.25rem;
+  }
+
+  .layoutBox {
+    --layoutBox-aft-width: 90%;
+    width: 100%;
   }
 
   .gamearea {

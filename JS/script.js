@@ -1,25 +1,117 @@
 "use strict";
 
 // Elements
+const layoutBox = document.querySelector(".layoutBox");
 const gameArea = document.querySelector(".gamearea");
 const boxes = document.querySelectorAll(".box");
 
-const condition = [
-  { checkInd: [0, 1, 2], angle: [] },
-  { checkInd: [3, 4, 5], angle: [] },
-  { checkInd: [6, 7, 8], angle: [] },
-  { checkInd: [0, 3, 6], angle: [] },
-  { checkInd: [1, 4, 7], angle: [] },
-  { checkInd: [2, 5, 8], angle: [] },
-  { checkInd: [0, 4, 8], angle: [] },
-  { checkInd: [2, 4, 6], angle: [] },
+// BTNs
+const restartBtn = document.querySelector(".restart__btn");
+
+let condition = [
+  {
+    checkInd: [0, 1, 2],
+    moveTo: [15, 50, "translate(-50%, 0%)", "rotate(0deg)"],
+  },
+  {
+    checkInd: [3, 4, 5],
+    moveTo: [48, 50, "translate(-50%, 0%)", "rotate(0deg)"],
+  },
+  {
+    checkInd: [6, 7, 8],
+    moveTo: [82.5, 50, "translate(-50%, 0%)", "rotate(0deg)"],
+  },
+  {
+    checkInd: [0, 3, 6],
+    moveTo: [50, -39, "translate(0%, -50%)", "rotate(90deg)"],
+  },
+  {
+    checkInd: [1, 4, 7],
+    moveTo: [50, -5.5, "translate(0%, -50%)", "rotate(90deg)"],
+  },
+  {
+    checkInd: [2, 5, 8],
+    moveTo: [50, 28.5, "translate(0%, -50%)", "rotate(90deg)"],
+  },
+  {
+    checkInd: [0, 4, 8],
+    moveTo: [50, 51, "translate(-50%, 0%)", "rotate(45deg)"],
+  },
+  {
+    checkInd: [2, 4, 6],
+    moveTo: [50, 48, "translate(-50%, 0%)", "rotate(135deg)"],
+  },
 ];
+const isScreenWidth = window.matchMedia("(max-width: 500px)").matches;
 let turn = "circle";
+let gameOver = false;
 
-function gotAWinner(w) {
-  console.log(w);
+// --> Change MoveTo Values for screen width <= 500px
+function changeMoveTo() {
+  if (isScreenWidth) {
+    condition[3] = {
+      checkInd: [0, 3, 6],
+      moveTo: [50, -25.5, "translate(0%, -50%)", "rotate(90deg)"],
+    };
+    condition[4] = {
+      checkInd: [1, 4, 7],
+      moveTo: [50, 4.5, "translate(0%, -50%)", "rotate(90deg)"],
+    };
+    condition[5] = {
+      checkInd: [2, 5, 8],
+      moveTo: [50, 35, "translate(0%, -50%)", "rotate(90deg)"],
+    };
+  }
 }
+// -------------------------------
 
+// --> Restart Game
+function resetGame() {
+  gameOver = false;
+  turn = "circle";
+  layoutBox.style.setProperty("--display", "none");
+
+  boxes.forEach((item) => {
+    let child = item.querySelector(".icon__container");
+    if (child) {
+      item.dataset.fill = "empty";
+      item.removeChild(child);
+    }
+  });
+}
+// -------------------------------
+
+// --> Automatic Reset Game
+function automaticReset() {
+  setTimeout(resetGame, 1 * 1000);
+}
+// -------------------------------
+
+// --> Check For Draw
+function isDraw() {
+  let res = [...boxes].every((item) => item.dataset.fill != "empty");
+
+  if (res && gameOver == false) {
+    automaticReset();
+  }
+}
+// -------------------------------
+
+// --> Get a Winner
+function gotAWinner(w) {
+  gameOver = true;
+  const move = w.moveTo;
+  layoutBox.style.setProperty("--top", move[0]);
+  layoutBox.style.setProperty("--left", move[1]);
+  layoutBox.style.setProperty("--transform", move[2]);
+  layoutBox.style.setProperty("--rotate", move[3]);
+  layoutBox.style.setProperty("--display", "block");
+
+  automaticReset();
+}
+// -------------------------------
+
+// --> Check For Winning Condition
 function checkCondition() {
   for (let i = 0; i < condition.length; i++) {
     let tmp = condition[i].checkInd;
@@ -38,36 +130,54 @@ function checkCondition() {
     }
   }
 }
+// -------------------------------
 
+// --> Create a Logo
+function createEle(t) {
+  let logo = t == "circle" ? "ellipse-outline" : "close-outline";
+  return `<span class="icon__container ${t}__container">
+            <ion-icon class="icon__sym ${t}__icon" name="${logo}"></ion-icon>
+          </span>`;
+}
+// -------------------------------
+
+// --> Fill the Box
 function fillBox(ele, t) {
   let sym;
   if (t == "circle") {
-    sym = `<span class="icon__container circle__container">
-            <ion-icon class="icon__sym circle__icon" name="ellipse-outline"></ion-icon>
-          </span>`;
+    sym = createEle(t);
     ele.dataset.fill = "circle";
     turn = "cross";
   } else if (t == "cross") {
-    sym = `<span class="icon__container cross__container">
-            <ion-icon class="icon__sym cross__icon" name="close-outline"></ion-icon>
-          </span>`;
+    sym = createEle(t);
     ele.dataset.fill = "cross";
     turn = "circle";
   }
   ele.innerHTML = sym;
 }
+// -------------------------------
 
+// --> Check for Empty Box
 function checkEmpty(ele) {
   const isEmpty = ele.dataset.fill;
   if (isEmpty == "empty") {
     fillBox(ele, turn);
   }
 }
+// -------------------------------
+
+// EventListener
+
+window.addEventListener("load", changeMoveTo);
 
 gameArea.addEventListener("click", function (e) {
   const ele = e.target;
+  if (gameOver) return;
   if (ele.classList.contains("box")) {
     checkEmpty(ele);
     checkCondition();
+    isDraw();
   }
 });
+
+restartBtn.addEventListener("click", resetGame);
