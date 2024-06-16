@@ -6,6 +6,8 @@ const gameArea = document.querySelector(".gamearea");
 const boxes = document.querySelectorAll(".box");
 
 // BTNs
+const volumeBtn = document.querySelector(".volume__btn");
+const muteVolBtn = document.querySelector(".mute__btn");
 const restartBtn = document.querySelector(".restart__btn");
 
 let condition = [
@@ -45,6 +47,12 @@ let condition = [
 const isScreenWidth = window.matchMedia("(max-width: 500px)").matches;
 let turn = "circle";
 let gameOver = false;
+let volume = true;
+
+// SOUNDs
+const sound = new Audio("../Sound/sound.wav");
+const touch = new Audio("../Sound/touch.wav");
+const resetSound = new Audio("../Sound/restart.mp3");
 
 // --> Change MoveTo Values for screen width <= 500px
 function changeMoveTo() {
@@ -61,6 +69,19 @@ function changeMoveTo() {
       checkInd: [2, 5, 8],
       moveTo: [50, 35, "translate(0%, -50%)", "rotate(90deg)"],
     };
+  }
+}
+// -------------------------------
+
+// --> Sound Effect
+function soundEffect(s) {
+  if (!volume) return;
+  if (s == "vol") {
+    sound.play();
+  } else if (s == "touch") {
+    touch.play();
+  } else if (s == "reset") {
+    resetSound.play();
   }
 }
 // -------------------------------
@@ -166,6 +187,24 @@ function checkEmpty(ele) {
 }
 // -------------------------------
 
+// --> Mute
+function mute() {
+  soundEffect("vol");
+  volume = false;
+  volumeBtn.classList.add("volume--hide");
+  muteVolBtn.classList.remove("volume--hide");
+}
+// -------------------------------
+
+// --> Unmute
+function unmute() {
+  soundEffect("vol");
+  volume = true;
+  volumeBtn.classList.remove("volume--hide");
+  muteVolBtn.classList.add("volume--hide");
+}
+// -------------------------------
+
 // EventListener
 
 window.addEventListener("load", changeMoveTo);
@@ -184,10 +223,17 @@ gameArea.addEventListener("click", function (e) {
   const ele = e.target;
   if (gameOver) return;
   if (ele.classList.contains("box")) {
+    soundEffect("touch");
     checkEmpty(ele);
     checkCondition();
     isDraw();
   }
 });
 
-restartBtn.addEventListener("click", resetGame);
+restartBtn.addEventListener("click", function () {
+  soundEffect("reset");
+  resetGame();
+});
+
+volumeBtn.addEventListener("click", mute);
+muteVolBtn.addEventListener("click", unmute);

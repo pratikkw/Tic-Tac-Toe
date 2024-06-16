@@ -170,6 +170,10 @@ body {
 }
 
 /* UTILITIES CLASS */
+.hide {
+  display: none;
+}
+
 .volume--hide {
   display: none;
 }
