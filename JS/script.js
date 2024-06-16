@@ -170,6 +170,16 @@ function checkEmpty(ele) {
 
 window.addEventListener("load", changeMoveTo);
 
+document.body.addEventListener(
+  "touchmove",
+  function (e) {
+    if (e.scale != 1) {
+      e.preventDefault();
+    }
+  },
+  { passive: false }
+);
+
 gameArea.addEventListener("click", function (e) {
   const ele = e.target;
   if (gameOver) return;
